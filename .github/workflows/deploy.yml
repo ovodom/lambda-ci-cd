@@ -5,9 +5,9 @@ on:
     branches:
       - main
 
-  permissions:
-    id-token: write
-    contents: read    
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   deploy:
@@ -17,19 +17,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
-
-      - name: Install AWS SAM CLI
-        run: pip install aws-sam-cli
-
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::630287362492:role/github-sam-deploy-role
           aws-region: eu-north-1
+
+      - name: Install AWS SAM CLI
+        run: pip install aws-sam-cli
 
       - name: Build SAM app
         run: sam build
