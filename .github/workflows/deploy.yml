@@ -13,7 +13,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    permissions:   # 👈 ADD THIS (CRITICAL)
+    permissions:
       id-token: write
       contents: read
 
